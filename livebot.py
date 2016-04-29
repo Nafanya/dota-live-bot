@@ -1,14 +1,23 @@
 import time
-import pprint
 import telepot
 
+from steamapi import get_live_games_stats
+
+
 def handle(msg):
-    pprint.pprint(msg)
+    print msg['text'] + ' from ' + str(msg['chat']['id'])
+    if msg['text'] == '/live':
+        sender = int(msg['chat']['id'])
+        for game in get_live_games_stats():
+            bot.sendMessage(sender, game)
 
-# probably should load it from file or take as argument
-TOKEN = 'put it here'
 
-bot = telepot.Bot(TOKEN)
+def load_token():
+    with open('tokens/telegram', 'r') as token_file:
+        return token_file.read().replace('\n', '')
+
+
+bot = telepot.Bot(load_token())
 bot.message_loop(handle)
 print ('Listening ...')
 
