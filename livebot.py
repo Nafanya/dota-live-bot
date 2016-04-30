@@ -1,15 +1,14 @@
 import time
 import telepot
 
-from steamapi import get_live_games_stats
+from livegames import get_live_games_stats
 
 
 def handle(msg):
     print msg['text'] + ' from ' + str(msg['chat']['id'])
     if msg['text'] == '/live':
-        sender = int(msg['chat']['id'])
         for game in get_live_games_stats():
-            bot.sendMessage(sender, game)
+            bot.sendMessage(int(msg['chat']['id']), game)
 
 
 def load_token():
