@@ -13,6 +13,13 @@ def get_important_leagues():
     return leagues
 
 
+def get_abbreviations():
+    teams = dict()
+    for team in [x.split(' ', 1) for x in list(open('teams.txt', 'r'))]:
+        teams[int(team[0])] = team[1]
+    return teams
+
+
 def get_time(game_id):
     minutes = int(game_id['scoreboard']['duration']) / 60
     seconds = int(game_id['scoreboard']['duration']) % 60
@@ -21,7 +28,12 @@ def get_time(game_id):
 
 def get_team_name(game_id, side):
     try:
-        return game_id[side + '_team']['team_name']
+        team_id = game_id[side + '_team']['team_id']
+        abbreviations = get_abbreviations()
+        if team_id in abbreviations:
+            return abbreviations[team_id]
+        else:
+            return game_id[side + '_team']['team_name']
     except KeyError:
         return 'Unknown team'
 
