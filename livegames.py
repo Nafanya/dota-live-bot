@@ -16,7 +16,7 @@ def get_important_leagues():
 def get_abbreviations():
     teams = dict()
     for team in [x.split(' ', 1) for x in list(open('teams.txt', 'r'))]:
-        teams[int(team[0])] = team[1]
+        teams[int(team[0])] = team[1].replace('\n', '')
     return teams
 
 
@@ -91,6 +91,8 @@ def get_game_info(game_id):
         return '> Whoops.'
 
     message = get_teams(game_id)
+    if int(game_id['scoreboard']['duration']) == 0:
+        return message + ', drafting'
     message += ', '
     message += get_kills(game_id)
     message += ', '
