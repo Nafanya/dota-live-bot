@@ -2,20 +2,20 @@ import dota2api
 
 
 def load_token():
-    with open('tokens/steam', 'r') as token_file:
+    with open('config/tokens/steam', 'r') as token_file:
         return token_file.read().replace('\n', '')
 
 
 def get_important_leagues():
     leagues = dict()
-    for league in [x.split(' ', 1) for x in list(open('leagues.txt', 'r'))]:
+    for league in [x.split(' ', 1) for x in list(open('config/top_leagues.txt', 'r'))]:
         leagues[int(league[0])] = league[1]
     return leagues
 
 
 def get_abbreviations():
     teams = dict()
-    for team in [x.split(' ', 1) for x in list(open('teams.txt', 'r'))]:
+    for team in [x.split(' ', 1) for x in list(open('config/teams.txt', 'r'))]:
         teams[int(team[0])] = team[1].replace('\n', '')
     return teams
 
@@ -106,7 +106,6 @@ def get_live_games_stats():
     stats = []
     for game in live_games['games']:
         if game['league_id'] in get_important_leagues() or game['spectators'] > 1000:
-            print game['league_id'], game['spectators']
             stats.append(get_game_info(game))
     if len(stats) == 0:
         stats.append('Sorry, no live games found.')
