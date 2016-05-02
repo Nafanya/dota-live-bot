@@ -1,3 +1,4 @@
 config/tokens/
 .idea/
 *.log
+templates/responses
