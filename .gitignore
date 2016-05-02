@@ -2,3 +2,6 @@ config/tokens/
 .idea/
 *.log
 templates/responses
+__pycache__
+venv
+
