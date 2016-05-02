@@ -1,0 +1,18 @@
+.game {
+    background: #222B34;
+    color: white;
+}
+
+.team_name {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.team_stats {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
